@@ -77,6 +77,11 @@ public class Gui_AñadirUsuario extends javax.swing.JDialog {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 113, 40));
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "Administrador", "Recepcionista", " " }));
+        cmbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 230, 40));
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
@@ -115,6 +120,12 @@ public class Gui_AñadirUsuario extends javax.swing.JDialog {
         if(Rol == 1){
             Role = "Admin";
         }
+        if(Rol == 2){
+            Role = "Admin";
+        }
+        if(Rol == 1){
+            Role = "Admin";
+        }
         
         Usuario.Agregar_Usuario(Nombre, Pass, Role);
         this.dispose();
@@ -129,6 +140,10 @@ public class Gui_AñadirUsuario extends javax.swing.JDialog {
         
 // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTipoActionPerformed
 
     /**
      * @param args the command line arguments

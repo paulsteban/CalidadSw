@@ -135,7 +135,7 @@ public class Gui_SeleccionarMedico extends javax.swing.JDialog {
 
         try {
 
-            resultado = Conexion.consulta("Select MAX(ID_Medico) from Medico");
+            resultado = Conexion.consulta("Select MAX(ID_Medico) from medico");
             while (resultado.next()) {
                 MaxID = resultado.getInt(1);
             }
@@ -152,7 +152,7 @@ public class Gui_SeleccionarMedico extends javax.swing.JDialog {
 
         try {
 
-            resultado = Conexion.consulta("Select ID_Medico, Nombres, Apellidos from Medico where Estado = " + true);
+            resultado = Conexion.consulta("Select ID_Medico, Nombres, Apellidos from medico where Estado = " + true);
             while (resultado.next()) {
                 ID_Med[i] = resultado.getInt(1);
 

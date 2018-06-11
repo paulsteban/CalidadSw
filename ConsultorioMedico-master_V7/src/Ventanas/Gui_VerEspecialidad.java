@@ -215,7 +215,7 @@ public class Gui_VerEspecialidad extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select * from Especialidad where Nombre like '%" + Buscar + "%'");
+            resultado = Conexion.consulta("Select * from especialidad where Nombre like '%" + Buscar + "%'");
 
             while (resultado.next()) {
                 Datos[0] = String.valueOf(resultado.getInt(1));
@@ -255,7 +255,7 @@ public class Gui_VerEspecialidad extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select * from Especialidad");
+            resultado = Conexion.consulta("Select * from especialidad");
 
             while (resultado.next()) {
                 Datos[0] = String.valueOf(resultado.getInt(1));

@@ -7,6 +7,7 @@
 package Clases;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -77,7 +78,7 @@ public static void Activar_Consulta(int ID){
     
     try{
         
-               CallableStatement consulta = Conexion.con.prepareCall("{call Activar_Consulta (?)}");
+               PreparedStatement consulta = Conexion.con.prepareStatement("UPDATE `especialidad` SET `Estado` = 1 WHERE `especialidad`.`ID_Especialidad` = ?");
 
                consulta.setInt(1, ID);
                consulta.execute();
@@ -93,12 +94,10 @@ public static void Activar_Consulta(int ID){
 }
 
 public static void Desactivar_Consulta(int ID){
-  
-
     
     try{
         
-               CallableStatement consulta = Conexion.con.prepareCall("{call Desactivar_Consulta (?)}");
+               PreparedStatement consulta = Conexion.con.prepareStatement("UPDATE `especialidad` SET `Estado` = 0 WHERE `especialidad`.`ID_Especialidad` = ?");
 
                consulta.setInt(1, ID);
                consulta.execute();

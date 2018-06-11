@@ -7,6 +7,7 @@
 package Clases;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ public static void Agregar_Medico(String Nombre, String Apellido, int ID_Especia
     
         try {
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call AgregarMedico (?,?,?,?)}");
+            PreparedStatement consulta = Conexion.con.prepareStatement("INSERT INTO `medico` (`Nombres`, `Apellidos`, `ID_Especialidad`,`cedula`) VALUES (?,?,?,?)");
 
            
                         consulta.setString(1, Nombre);
@@ -53,14 +54,14 @@ public static void Actualizar_Medico(int ID, String Nombre, String Apellido, int
     
         try {
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call ModificarMedico (?,?,?,?,?) }");
+        PreparedStatement consulta = Conexion.con.prepareStatement("UPDATE `medico` SET `Nombres` = ?, `Apellidos` = ?, `ID_Especialidad` = ?, `cedula` = ? WHERE `medico`.`ID_Medico` = ?");
 
-                        consulta.setInt(1,ID);
-                        consulta.setString(2, Nombre);
-                        consulta.setString(3, Apellido);
-                        consulta.setInt(4, ID_Especialidad);
-                        consulta.setString(5, Cedula);
-        
+                        
+                        consulta.setString(1, Nombre);
+                        consulta.setString(2, Apellido);
+                        consulta.setInt(3, ID_Especialidad);
+                        consulta.setString(4, Cedula);
+                        consulta.setInt(5,ID);
                         consulta.execute();
 
          JOptionPane.showMessageDialog(null,"Datos del Medico Actualizados Correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
@@ -78,7 +79,7 @@ public static void Usuario_Medico(int ID_M, int ID_U, String Usuario){
     
     try{
         
-               CallableStatement consulta = Conexion.con.prepareCall("{call UsuarioMedico (?,?)}");
+               PreparedStatement consulta = Conexion.con.prepareStatement("{call UsuarioMedico (?,?)}");
 
                consulta.setInt(1, ID_M);
                consulta.setInt(2, ID_U);

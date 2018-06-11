@@ -7,6 +7,7 @@
 package Clases;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -23,15 +24,13 @@ public static void Agregar_Dia_Medico(int ID_Medico, String Dia){
     
         try {
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call AgregarDia_Medico (?,?)}");
+            PreparedStatement consulta = Conexion.con.prepareStatement("INSERT INTO `dia_medico` (`ID_Medico`, `Dia`) VALUES (?,?)");
 
                         consulta.setInt(1, ID_Medico);
-                        consulta.setString(2, Dia);
-                    
-                       
+                        consulta.setString(2, Dia);                                      
                         consulta.execute();
 
-     //    JOptionPane.showMessageDialog(null,"Datos del Dia Medico guardado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+     
 
      }   catch (SQLException ex) {     
       JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);

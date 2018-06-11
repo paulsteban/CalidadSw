@@ -11,8 +11,12 @@ import Clases.Paciente;
 import Clases.Utiles;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -284,7 +288,7 @@ public class Gui_AgregarPaciente extends javax.swing.JInternalFrame {
         setBounds(0, 0, 779, 586);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void Guardar() {
+    public void Guardar() throws SQLException {
         String error = "";
         String Nombre = txtNombre.getText().trim();
         String Apellido = txtApellido.getText().trim();
@@ -326,8 +330,13 @@ public class Gui_AgregarPaciente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, error,
                     "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
+            //  Paciente.Agregar_Paciente(Nombre, Apellido, Peso, Altura, Edad, Alergias, Enfermedades, TipoSangre, Telefono, Email, Genero, Cedula, Direccion);
+            System.out.println("obteniendo datos");
             Paciente.Agregar_Paciente(Nombre, Apellido, Peso, Altura, Edad, Alergias, Enfermedades, TipoSangre, Telefono, Email, Genero, Cedula, Direccion);
-            Limpiar();// TODO add your handling code here:
+            System.out.println("listo");
+          
+  
+          Limpiar();// TODO add your handling code here:
 
         }
 
@@ -382,10 +391,19 @@ public class Gui_AgregarPaciente extends javax.swing.JInternalFrame {
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Guardar();
+        
+        try {
+          Guardar();               
+        } catch (SQLException ex) {
+            Logger.getLogger(Gui_AgregarPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     ResultSet resultado;
+    
     int ID_Esp[];
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened

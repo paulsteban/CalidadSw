@@ -7,6 +7,7 @@
 package Clases;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -24,7 +25,7 @@ public static void Agregar_Usuario(String Nombre, String Contrasena, String Rol)
     
         try {
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call AgregarUsuario (?,?,?)}");
+            PreparedStatement consulta = Conexion.con.prepareStatement("INSERT INTO `usuario` (`Nombre_Usuario`, `Contrasena_Usuario`, `Rol_Usuario`) VALUES (?,?,?)");
 
                         consulta.setString(1, Nombre);
                         consulta.setString(2,seg.hashing(Contrasena));
@@ -49,12 +50,13 @@ public static void Actualizar_Usuario(int ID, String Nombre, String Contrasena, 
     
         try {
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call ModificarUsuario (?,?,?,?) }");
+        PreparedStatement consulta = Conexion.con.prepareStatement("UPDATE `usuario` SET `Nombre_Usuario` = ?, `Contrasena_Usuario` = ?, `Rol_Usuario` = ? WHERE `usuario`.`ID_Usuario` = ?");
 
-                        consulta.setInt(1,ID);
-                        consulta.setString(2, Nombre);
-                        consulta.setString(3, seg.hashing(Contrasena));
-                        consulta.setString(4, Rol);  
+                        
+                        consulta.setString(1, Nombre);
+                        consulta.setString(2, seg.hashing(Contrasena));
+                        consulta.setString(3, Rol);  
+                        consulta.setInt(4,ID);
        
                         consulta.execute();
 
@@ -73,7 +75,7 @@ public static void Activar_Usuario(int ID){
     
     try{
         
-               CallableStatement consulta = Conexion.con.prepareCall("{call Activar_Usuario (?)}");
+               PreparedStatement consulta = Conexion.con.prepareStatement("{call Activar_Usuario (?)}");
 
                consulta.setInt(1, ID);
                consulta.execute();
@@ -94,7 +96,7 @@ public static void Desactivar_Usuario(int ID){
     
     try{
         
-               CallableStatement consulta = Conexion.con.prepareCall("{call Desactivar_Usuario (?)}");
+               PreparedStatement consulta = Conexion.con.prepareStatement("{call Desactivar_Usuario (?)}");
 
                consulta.setInt(1, ID);
                consulta.execute();

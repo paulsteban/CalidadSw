@@ -88,8 +88,7 @@ String [] Datos = new String[3];
 
 try{
     
-    resultado = Conexion.consulta("Select Dia, Hora_Inicial, Hora_Final from Horario "
-            + "Where ID_Medico = "+ID_Medico);
+    resultado = Conexion.consulta("select dm.Dia, hm.Hora_Inicial, hm.Hora_Final from dia_medico as dm, hora_medico as hm where dm.ID_Dia_Medico = hm.ID_Dia_Medico and dm.ID_Medico = "+ID_Medico);
     
     while(resultado.next()){
         

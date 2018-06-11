@@ -158,6 +158,11 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
         ckL.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         ckL.setText("Lunes");
         ckL.setEnabled(false);
+        ckL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ckLActionPerformed(evt);
+            }
+        });
         jPanel3.add(ckL, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         ckM.setBackground(new java.awt.Color(153, 255, 153));
@@ -226,7 +231,7 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
         jLabel5.setText("Agenda del Médico");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 983, 450));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 983, 450));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Paciente:*");
@@ -401,7 +406,7 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select Max(ID_Especialidad) from Especialidad");
+            resultado = Conexion.consulta("Select Max(ID_Especialidad) from especialidad");
 
             while (resultado.next()) {
                 ID_Especialidad = resultado.getInt(1);
@@ -420,7 +425,7 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select ID_Especialidad, Nombre from Especialidad where Estado = " + true);
+            resultado = Conexion.consulta("Select ID_Especialidad, Nombre from especialidad where Estado = " + true);
 
             while (resultado.next()) {
                 ID_Esp[i] = resultado.getInt(1);
@@ -435,7 +440,7 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select Max(ID_Paciente) from Paciente");
+            resultado = Conexion.consulta("Select Max(ID_Paciente) from paciente");
 
             while (resultado.next()) {
                 ID_Paciente = resultado.getInt(1);
@@ -454,7 +459,7 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select ID_Paciente, Nombres, Apellidos from Paciente where Estado = " + true);
+            resultado = Conexion.consulta("Select ID_Paciente, Nombres, Apellidos from paciente where Estado = " + true);
 
             while (resultado.next()) {
                 ID_Pac[j] = resultado.getInt(1);
@@ -469,7 +474,7 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select Max(ID_Medico) from Medico");
+            resultado = Conexion.consulta("Select Max(ID_Medico) from medico");
 
             while (resultado.next()) {
                 ID_Medico = resultado.getInt(1);
@@ -539,7 +544,7 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select ID_Medico, Nombres, Apellidos from Medico where "
+            resultado = Conexion.consulta("Select ID_Medico, Nombres, Apellidos from medico where "
                     + "(ID_Especialidad = " + ID_Especialidad + ") and (Estado = " + true + ")");
 
             while (resultado.next()) {
@@ -602,8 +607,7 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select Dia, Hora_Inicial, Hora_Final"
-                    + " from Horario where ID_Medico = " + ID_Medico);
+            resultado = Conexion.consulta("select dm.Dia, hm.Hora_Inicial, hm.Hora_Final from dia_medico as dm, hora_medico as hm where dm.ID_Dia_Medico = hm.ID_Dia_Medico and dm.ID_Medico ="+ID_Medico);
 
             while (resultado.next()) {
                 Dias.add(resultado.getString(1));
@@ -623,7 +627,7 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
             Date Fecha = jCalendar1.getDate();
             date = Fecha.getTime();
             java.sql.Date Fechac = new java.sql.Date(date);
-            resultado = Conexion.consulta("Select Hora_Cita, Estado from Cita where (ID_Medico = " + ID_Medico
+            resultado = Conexion.consulta("Select Hora_Cita, Estado from cita where (ID_Medico = " + ID_Medico
                     + ") and (Fecha_Cita = '" + Fechac + "')");
 
             while (resultado.next()) {
@@ -894,6 +898,10 @@ public class Gui_AgregarCita extends javax.swing.JInternalFrame {
     private void cmbPacienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPacienteItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbPacienteItemStateChanged
+
+    private void ckLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckLActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ckLActionPerformed
 
     public class MiRender extends DefaultTableCellRenderer {
 

@@ -7,6 +7,7 @@
 package Clases;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ public static void Agregar_Hora_Medico(int ID_Dia_Medico, String HoraInicio, Str
     
         try {
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call AgregarHora_Medico (?,?,?)}");
+            PreparedStatement consulta = Conexion.con.prepareStatement("INSERT INTO `hora_medico` (`ID_Dia_Medico`, `Hora_Inicial`, `Hora_Final`) VALUES (?,?,?)");
 
                         consulta.setInt(1, ID_Dia_Medico);
                         consulta.setString(2, HoraInicio);

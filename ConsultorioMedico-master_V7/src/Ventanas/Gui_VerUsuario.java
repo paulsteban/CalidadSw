@@ -185,7 +185,7 @@ public class Gui_VerUsuario extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select * from Usuario");
+            resultado = Conexion.consulta("Select * from usuario");
 
             while (resultado.next()) {
                 Datos[0] = String.valueOf(resultado.getInt(1));
@@ -258,7 +258,7 @@ public class Gui_VerUsuario extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select * from Usuario where Nombre_Usuario like '%" + Buscar + "%'");
+            resultado = Conexion.consulta("Select * from usuario where Nombre_Usuario like '%" + Buscar + "%'");
 
             while (resultado.next()) {
                 Datos[0] = String.valueOf(resultado.getInt(1));

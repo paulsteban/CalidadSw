@@ -104,6 +104,11 @@ public class Gui_VerPaciente extends javax.swing.JInternalFrame {
         jLabel1.setText("Buscar Pacientes Registrados:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 84, 234, 27));
 
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
@@ -230,7 +235,7 @@ public class Gui_VerPaciente extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select * from Paciente");
+            resultado = Conexion.consulta("Select * from paciente");
 
             while (resultado.next()) {
                 Datos[0] = String.valueOf(resultado.getInt(1));
@@ -318,7 +323,7 @@ public class Gui_VerPaciente extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select * from Paciente where Nombres like '%" + Buscar + "%' "
+            resultado = Conexion.consulta("Select * from paciente where Nombres like '%" + Buscar + "%' "
                     + "or Apellidos like '%" + Buscar + "%'");
 
             while (resultado.next()) {
@@ -356,6 +361,10 @@ public class Gui_VerPaciente extends javax.swing.JInternalFrame {
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         Buscar();        // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
     public void VerExpediente() {
 

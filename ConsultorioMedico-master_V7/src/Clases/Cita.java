@@ -7,6 +7,7 @@
 package Clases;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -27,16 +28,18 @@ public static void Agregar_Cita(Date Fecha, String Hora, int ID_Medico,  int ID_
  
         try {
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call AgregarCita (?,?,?,?,?,?,?)}");
+        PreparedStatement consulta = Conexion.con.prepareStatement("INSERT INTO `cita` (`Fecha_Cita`, `Hora_Cita`, `Dia_Cita`, `Semana_Cita`, `ID_Medico`, `ID_Paciente`, `Estado`) VALUES (?,?,?,?,?,?,?)");
 
            
                         consulta.setDate(1, FechaC);
                         consulta.setString(2, Hora);
-                        consulta.setInt(3, ID_Medico);
-                        consulta.setInt(4, ID_Paciente);
-                        consulta.setString(5, Estado);
-                        consulta.setString(6, Dia_Semana);
-                        consulta.setInt(7, Semana_Cita);
+                        consulta.setString(3, Dia_Semana);
+                        consulta.setInt(4, Semana_Cita);
+                        consulta.setInt(5, ID_Medico);
+                        consulta.setInt(6, ID_Paciente);
+                        consulta.setString(7, Estado);
+                        
+                        
                         
   
                         consulta.execute();
@@ -88,7 +91,7 @@ public static void Cita_Atendida(int ID){
     
     try{
         
-               CallableStatement consulta = Conexion.con.prepareCall("{call CitaAtendida (?)}");
+               PreparedStatement consulta = Conexion.con.prepareStatement("UPDATE `cita` SET `Estado` = 'Atendida' WHERE `cita`.`ID_Cita` = ?");
 
                consulta.setInt(1, ID);
                consulta.execute();
@@ -109,7 +112,7 @@ public static void Cancelar_Cita(int ID){
     
     try{
         
-               CallableStatement consulta = Conexion.con.prepareCall("{call Cancelar_Cita (?)}");
+               PreparedStatement consulta = Conexion.con.prepareStatement("UPDATE `cita` SET `Estado` = 'Cancelada' WHERE `cita`.`ID_Cita` = ?");
 
                consulta.setInt(1, ID);
                consulta.execute();

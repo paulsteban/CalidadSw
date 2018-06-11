@@ -163,7 +163,7 @@ public class Gui_ModificarDiagnostico extends javax.swing.JDialog {
 
             resultado = Conexion.consulta("Select ID_Consulta, Descripcion_Consulta, "
                     + "Diagnostico, Receta, Nombres, Apellidos, NombreM, ApellidoM"
-                    + " from Expediente Where ID_Consulta = " + ID);
+                    + " from expediente Where ID_Consulta = " + ID);
 
             while (resultado.next()) {
                 IDD = resultado.getInt(1);

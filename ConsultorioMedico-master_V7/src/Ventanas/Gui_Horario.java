@@ -200,6 +200,11 @@ public class Gui_Horario extends javax.swing.JDialog {
         PanelL.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 90, 39));
 
         cmbDesde.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbDesde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDesdeActionPerformed(evt);
+            }
+        });
         PanelL.add(cmbDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 150, 39));
 
         cmbHasta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
@@ -446,177 +451,171 @@ public class Gui_Horario extends javax.swing.JDialog {
     }
 
     public void Guardar() {
+        if (ckL.isSelected()) {
+            int HRi = cmbDesde.getSelectedIndex();
+            int HRs = cmbHasta.getSelectedIndex();
 
-        //System.out.println(!ckL.isSelected());
-        if (!ckL.isSelected() && !ckM.isSelected() && !ckX.isSelected() && !ckJ.isSelected() && !ckV.isSelected()
-                && !ckS.isSelected() && !ckD.isSelected()) {
-            JOptionPane.showMessageDialog(this, "Seleccione al menos un dia", "Seleccione", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (ckL.isSelected()) {
-                int HRi = cmbDesde.getSelectedIndex();
-                int HRs = cmbHasta.getSelectedIndex();
-
-                if (HRi == 0 || HRs == 0) {
-                    JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (HRi > HRs) {
-                    JOptionPane.showMessageDialog(this, "La hora de salida el Lunes no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
-                            + " la de salida",
-                            "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            if (HRi == 0 || HRs == 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
-            if (ckM.isSelected()) {
-                int HRi = cmbDesde2.getSelectedIndex();
-                int HRs = cmbHasta2.getSelectedIndex();
-
-                if (HRi == 0 || HRs == 0) {
-                    JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (HRi > HRs) {
-                    JOptionPane.showMessageDialog(this, "La hora de salida del Martes no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
-                            + " la de salida",
-                            "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            if (HRi > HRs) {
+                JOptionPane.showMessageDialog(this, "La hora de salida el Lunes no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
+                        + " la de salida",
+                        "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-
-            if (ckX.isSelected()) {
-                int HRi = cmbDesde3.getSelectedIndex();
-                int HRs = cmbHasta3.getSelectedIndex();
-
-                if (HRi == 0 || HRs == 0) {
-                    JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (HRi > HRs) {
-                    JOptionPane.showMessageDialog(this, "La hora de salida del Miércoles no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
-                            + " la de salida",
-                            "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            }
-
-            if (ckJ.isSelected()) {
-                int HRi = cmbDesde4.getSelectedIndex();
-                int HRs = cmbHasta4.getSelectedIndex();
-
-                if (HRi == 0 || HRs == 0) {
-                    JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (HRi > HRs) {
-                    JOptionPane.showMessageDialog(this, "La hora de salida del Jueves no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
-                            + " la de salida",
-                            "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            }
-
-            if (ckV.isSelected()) {
-                int HRi = cmbDesde5.getSelectedIndex();
-                int HRs = cmbHasta5.getSelectedIndex();
-
-                if (HRi == 0 || HRs == 0) {
-                    JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (HRi > HRs) {
-                    JOptionPane.showMessageDialog(this, "La hora de salida del Viernes no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
-                            + " la de salida",
-                            "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            }
-
-            if (ckS.isSelected()) {
-                int HRi = cmbDesde6.getSelectedIndex();
-                int HRs = cmbHasta6.getSelectedIndex();
-
-                if (HRi == 0 || HRs == 0) {
-                    JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (HRi > HRs) {
-                    JOptionPane.showMessageDialog(this, "La hora de salida del Sabado no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
-                            + " la de salida",
-                            "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            }
-
-            if (ckD.isSelected()) {
-                int HRi = cmbDesde9.getSelectedIndex();
-                int HRs = cmbHasta9.getSelectedIndex();
-
-                if (HRi == 0 || HRs == 0) {
-                    JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (HRi > HRs) {
-                    JOptionPane.showMessageDialog(this, "La hora de salida el Domingo no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
-                            + " la de salida",
-                            "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            }
-
-            Medico.Agregar_Medico(Nombre, Apellido, ID_Especialidad, Cedula);
-
-            int ID_MaxU = 0;
-            int ID_MaxM = 0;
-
-            try {
-                resultado = Conexion.consulta("Select Max(ID_Medico) from Medico");
-
-                while (resultado.next()) {
-                    ID_MaxM = resultado.getInt(1);
-                }
-
-            } catch (SQLException ex) {
-            }
-
-            AgregarHorario(ID_MaxM);
-
-            String NombreUsuario = Nombre.trim() + ID_MaxM;
-
-            StringTokenizer ST = new StringTokenizer(NombreUsuario, " ");
-
-            String Name = "";
-            while (ST.hasMoreTokens()) {
-                Name = Name.concat(ST.nextToken());
-            }
-
-            Name = Name.toLowerCase();
-
-            Gui_AñadirUsuarioMedico AUM = new Gui_AñadirUsuarioMedico(null, true);
-            AUM.setNombreUsuario(Name);
-            AUM.setVisible(true);
-
-            try {
-                resultado = Conexion.consulta("Select Max(ID_Usuario) from Usuario");
-
-                while (resultado.next()) {
-                    ID_MaxU = resultado.getInt(1);
-                }
-
-            } catch (SQLException ex) {
-            }
-
-            Medico.Usuario_Medico(ID_MaxM, ID_MaxU, Name);
-            AM.dispose();
-            this.dispose();
         }
+
+        if (ckM.isSelected()) {
+            int HRi = cmbDesde2.getSelectedIndex();
+            int HRs = cmbHasta2.getSelectedIndex();
+
+            if (HRi == 0 || HRs == 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (HRi > HRs) {
+                JOptionPane.showMessageDialog(this, "La hora de salida del Martes no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
+                        + " la de salida",
+                        "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        if (ckX.isSelected()) {
+            int HRi = cmbDesde3.getSelectedIndex();
+            int HRs = cmbHasta3.getSelectedIndex();
+
+            if (HRi == 0 || HRs == 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (HRi > HRs) {
+                JOptionPane.showMessageDialog(this, "La hora de salida del Miércoles no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
+                        + " la de salida",
+                        "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        if (ckJ.isSelected()) {
+            int HRi = cmbDesde4.getSelectedIndex();
+            int HRs = cmbHasta4.getSelectedIndex();
+
+            if (HRi == 0 || HRs == 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (HRi > HRs) {
+                JOptionPane.showMessageDialog(this, "La hora de salida del Jueves no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
+                        + " la de salida",
+                        "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        if (ckV.isSelected()) {
+            int HRi = cmbDesde5.getSelectedIndex();
+            int HRs = cmbHasta5.getSelectedIndex();
+
+            if (HRi == 0 || HRs == 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (HRi > HRs) {
+                JOptionPane.showMessageDialog(this, "La hora de salida del Viernes no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
+                        + " la de salida",
+                        "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        if (ckS.isSelected()) {
+            int HRi = cmbDesde6.getSelectedIndex();
+            int HRs = cmbHasta6.getSelectedIndex();
+
+            if (HRi == 0 || HRs == 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (HRi > HRs) {
+                JOptionPane.showMessageDialog(this, "La hora de salida del Sabado no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
+                        + " la de salida",
+                        "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        if (ckD.isSelected()) {
+            int HRi = cmbDesde9.getSelectedIndex();
+            int HRs = cmbHasta9.getSelectedIndex();
+
+            if (HRi == 0 || HRs == 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione la hora correctamente", "Seleccione", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (HRi > HRs) {
+                JOptionPane.showMessageDialog(this, "La hora de salida el Domingo no puede ser menor que la de entrada, y la hora de entrada no puede ser mayor que"
+                        + " la de salida",
+                        "Seleccione correctamente", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        Medico.Agregar_Medico(Nombre, Apellido, ID_Especialidad, Cedula);
+
+        int ID_MaxU = 0;
+        int ID_MaxM = 0;
+
+        try {
+            resultado = Conexion.consulta("Select Max(ID_Medico) from medico");
+
+            while (resultado.next()) {
+                ID_MaxM = resultado.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+        }
+
+        AgregarHorario(ID_MaxM);
+
+        String NombreUsuario = Nombre.trim() + ID_MaxM;
+
+        StringTokenizer ST = new StringTokenizer(NombreUsuario, " ");
+
+        String Name = "";
+        while (ST.hasMoreTokens()) {
+            Name = Name.concat(ST.nextToken());
+        }
+
+        Name = Name.toLowerCase();
+
+        Gui_AñadirUsuarioMedico AUM = new Gui_AñadirUsuarioMedico(null, true);
+        AUM.setNombreUsuario(Name);
+        AUM.setVisible(true);
+
+        try {
+            resultado = Conexion.consulta("Select Max(ID_Usuario) from usuario");
+
+            while (resultado.next()) {
+                ID_MaxU = resultado.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+        }
+
+//        Medico.Usuario_Medico(ID_MaxM, ID_MaxU, Name);
+        AM.dispose();
+        this.dispose();
+
     }
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -660,7 +659,7 @@ public class Gui_Horario extends javax.swing.JDialog {
             Dia_Medico.Agregar_Dia_Medico(ID_MaxM, "L");
 
             try {
-                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from Dia_Medico");
+                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from dia_medico");
 
                 while (resultado.next()) {
                     ID_MaxD = resultado.getInt(1);
@@ -686,7 +685,7 @@ public class Gui_Horario extends javax.swing.JDialog {
             Dia_Medico.Agregar_Dia_Medico(ID_MaxM, "M");
 
             try {
-                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from Dia_Medico");
+                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from dia_medico");
 
                 while (resultado.next()) {
                     ID_MaxD = resultado.getInt(1);
@@ -712,7 +711,7 @@ public class Gui_Horario extends javax.swing.JDialog {
             Dia_Medico.Agregar_Dia_Medico(ID_MaxM, "X");
 
             try {
-                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from Dia_Medico");
+                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from dia_medico");
 
                 while (resultado.next()) {
                     ID_MaxD = resultado.getInt(1);
@@ -738,7 +737,7 @@ public class Gui_Horario extends javax.swing.JDialog {
             Dia_Medico.Agregar_Dia_Medico(ID_MaxM, "J");
 
             try {
-                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from Dia_Medico");
+                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from dia_medico");
 
                 while (resultado.next()) {
                     ID_MaxD = resultado.getInt(1);
@@ -764,7 +763,7 @@ public class Gui_Horario extends javax.swing.JDialog {
             Dia_Medico.Agregar_Dia_Medico(ID_MaxM, "V");
 
             try {
-                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from Dia_Medico");
+                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from dia_medico");
 
                 while (resultado.next()) {
                     ID_MaxD = resultado.getInt(1);
@@ -790,7 +789,7 @@ public class Gui_Horario extends javax.swing.JDialog {
             Dia_Medico.Agregar_Dia_Medico(ID_MaxM, "S");
 
             try {
-                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from Dia_Medico");
+                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from dia_medico");
 
                 while (resultado.next()) {
                     ID_MaxD = resultado.getInt(1);
@@ -816,7 +815,7 @@ public class Gui_Horario extends javax.swing.JDialog {
             Dia_Medico.Agregar_Dia_Medico(ID_MaxM, "D");
 
             try {
-                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from Dia_Medico");
+                resultado = Conexion.consulta("Select Max(ID_Dia_Medico) from dia_medico");
 
                 while (resultado.next()) {
                     ID_MaxD = resultado.getInt(1);
@@ -892,6 +891,10 @@ public class Gui_Horario extends javax.swing.JDialog {
     private void cmbHasta3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHasta3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbHasta3ActionPerformed
+
+    private void cmbDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDesdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDesdeActionPerformed
 
     /**
      * @param args the command line arguments

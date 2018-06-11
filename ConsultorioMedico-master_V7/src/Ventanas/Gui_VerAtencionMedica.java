@@ -96,6 +96,11 @@ public class Gui_VerAtencionMedica extends javax.swing.JInternalFrame {
         jLabel1.setText("Buscar Consultas por:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 30));
 
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
@@ -193,7 +198,7 @@ public class Gui_VerAtencionMedica extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select * from ConsultaV");
+            resultado = Conexion.consulta("Select * from consulta");
 
             while (resultado.next()) {
                 Datos[0] = String.valueOf(resultado.getInt(1));
@@ -275,13 +280,13 @@ public class Gui_VerAtencionMedica extends javax.swing.JInternalFrame {
         try {
 
             if (cmbBusc.getSelectedIndex() == 0) {
-                resultado = Conexion.consulta("Select * from ConsultaV "
+                resultado = Conexion.consulta("Select * from consulta "
                         + "where Nombres like '%" + Buscar + "%' "
                         + "or Apellidos like '%" + Buscar + "%'");
             }
 
             if (cmbBusc.getSelectedIndex() == 1) {
-                resultado = Conexion.consulta("Select * from ConsultaV "
+                resultado = Conexion.consulta("Select * from consulta "
                         + "where NombresMed like '%" + Buscar + "%' "
                         + "or ApellidosMed like '%" + Buscar + "%'");
             }
@@ -318,6 +323,10 @@ public class Gui_VerAtencionMedica extends javax.swing.JInternalFrame {
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         Buscar();        // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
     DefaultTableModel model = new DefaultTableModel() {
 

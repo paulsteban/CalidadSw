@@ -271,7 +271,7 @@ public class Gui_ModificarPaciente extends javax.swing.JDialog {
 
         try {
 
-            resultado = Conexion.consulta("Select * from Paciente where ID_Paciente = " + ID);
+            resultado = Conexion.consulta("Select * from paciente where ID_Paciente = " + ID);
 
             while (resultado.next()) {
                 IDD = resultado.getInt(1);

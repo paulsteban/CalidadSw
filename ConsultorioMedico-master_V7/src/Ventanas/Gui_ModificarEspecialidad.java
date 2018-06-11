@@ -37,7 +37,7 @@ public class Gui_ModificarEspecialidad extends javax.swing.JDialog {
 
         try {
 
-            resultado = Conexion.consulta("Select * from Especialidad Where ID_Especialidad = " + ID);
+            resultado = Conexion.consulta("Select * from especialidad Where ID_Especialidad = " + ID);
 
             while (resultado.next()) {
                 IDD = resultado.getInt(1);

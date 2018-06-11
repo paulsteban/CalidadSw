@@ -250,8 +250,9 @@ public class Gui_AgreAtencionMedica extends javax.swing.JInternalFrame {
 
             try {
 
-                resultado = Conexion.consulta("Select Nombres_Med, Apellidos_Med, Nombres, Apellidos"
-                        + " from CitaV Where ID_Cita = " + ID_Cita);
+                resultado = Conexion.consulta("select m.Nombres, m.Apellidos,p.Nombres,p.Apellidos" +
+                    "from medico m, paciente p, cita c" +
+                    "where c.ID_Medico ="+ID_Cita+" and m.ID_Medico ="+ID_Cita+" and c.ID_Paciente="+ID_Cita+" and c.ID_Paciente = " + ID_Cita);
 
                 while (resultado.next()) {
                     Dr = resultado.getString(1).trim() + " " + resultado.getString(2).trim();
@@ -292,12 +293,13 @@ public class Gui_AgreAtencionMedica extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select ID_Medico from Medico where ID_Usuario = " + Gui_Principal.ID_Usuario);
+            resultado = Conexion.consulta("Select ID_Medico from medico where ID_Usuario = " + Gui_Principal.ID_Usuario);
 
             while (resultado.next()) {
 
                 ID_Medico = resultado.getInt(1);
                 System.out.println("ID " + ID_Medico);
+                CargarHorario();
 
             }
         } catch (SQLException ex) {
@@ -417,8 +419,9 @@ public class Gui_AgreAtencionMedica extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select Dia, Hora_Inicial, Hora_Final"
-                    + " from Horario where ID_Medico = " + ID_Medico);
+            resultado = Conexion.consulta("select Dia,Hora_Inicial,Hora_Final " +
+"from hora_medico a, dia_medico b " +
+"where a.ID_Dia_Medico ="+ID_Medico+" and b.ID_Dia_Medico =" + ID_Medico);
 
             while (resultado.next()) {
                 Dias.add(resultado.getString(1));
@@ -440,9 +443,9 @@ public class Gui_AgreAtencionMedica extends javax.swing.JInternalFrame {
             Date Fecha = jCalendar1.getDate();
             date = Fecha.getTime();
             java.sql.Date Fechac = new java.sql.Date(date);
-            resultado = Conexion.consulta("Select Hora_Cita, Estado, Nombres, Apellidos, ID_Cita"
-                    + " from CitaV where (ID_Medico = " + ID_Medico
-                    + ") and (Fecha_Cita = '" + Fechac + "')");
+            resultado = Conexion.consulta("select Hora_Cita, c.Estado, m.Nombres, m.Apellidos, ID_Cita" +
+"from medico m,cita c" +
+"where c.ID_Medico = "+ID_Medico+" and m.ID_Medico = "+ID_Medico+" and Fecha_Cita =  "+Fechac);
 
             while (resultado.next()) {
                 Hrs.add(resultado.getString(1));

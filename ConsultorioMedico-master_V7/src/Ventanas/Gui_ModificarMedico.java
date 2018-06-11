@@ -110,6 +110,11 @@ public class Gui_ModificarMedico extends javax.swing.JDialog {
         jPanel2.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 40));
 
         txtCedula.setEditable(false);
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaActionPerformed(evt);
+            }
+        });
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCedulaKeyTyped(evt);
@@ -157,6 +162,8 @@ public class Gui_ModificarMedico extends javax.swing.JDialog {
     int IDD;
     
      public void CargarDatos(int ID){
+         
+         System.out.println("2------------>"+ID);
         
         CargarEspecialidad();
          
@@ -167,15 +174,15 @@ public class Gui_ModificarMedico extends javax.swing.JDialog {
         
         try{
             
-            resultado = Conexion.consulta("Select ID_Medico,Nombres, Apellidos, Nombre, cedula "
-                    + " from MedicoV Where ID_Medico = "+ID);
+            resultado = Conexion.consulta("Select * "
+                    + " from medico Where ID_Medico = "+ID);
             
             while(resultado.next()){
              IDD = resultado.getInt(1);
              Nombre = resultado.getString(2);
              Apellido = resultado.getString(3);
              Especialidad = resultado.getString(4);
-             Cedula = resultado.getString(5);
+             Cedula = resultado.getString(7);
             }
             
         }catch(SQLException ex){}
@@ -225,7 +232,7 @@ public class Gui_ModificarMedico extends javax.swing.JDialog {
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ModificarHorario(); 
+ModificarHorario(); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     ResultSet resultado;
@@ -237,7 +244,7 @@ public void CargarEspecialidad(){
      
       try{
          
-     resultado = Conexion.consulta("Select Max(ID_Especialidad) from Especialidad");
+     resultado = Conexion.consulta("Select Max(ID_Especialidad) from especialidad");
          
      while(resultado.next()){
          ID_Especialidad = resultado.getInt(1);
@@ -259,7 +266,7 @@ public void CargarEspecialidad(){
       
       try{
          
-     resultado = Conexion.consulta("Select ID_Especialidad, Nombre from Especialidad Where Estado = 1");
+     resultado = Conexion.consulta("Select ID_Especialidad, Nombre from especialidad Where Estado = 1");
          
      while(resultado.next()){
          ID_Esp [i] = resultado.getInt(1);
@@ -320,6 +327,10 @@ if(!Character.isLetter(a)&&!Character.isISOControl(a)&&a!=' '){
     Toolkit.getDefaultToolkit().beep();
 }        // TODO add your handling code here:  
     }//GEN-LAST:event_txtCedulaKeyTyped
+
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
 
                                          
 

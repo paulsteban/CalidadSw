@@ -7,6 +7,7 @@
 package Clases;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ public static void Agregar_Paciente(String Nombre, String Apellido, float Peso, 
     
         try {
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call AgregarPaciente (?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            PreparedStatement consulta = Conexion.con.prepareStatement("INSERT INTO `paciente` (`Nombres`, `Apellidos`, `Peso`, `Altura`, `Edad`, `Telefono`, `Alergias`, `Enfermedades`, `Tipo_Sangre`, `Mail`, `Genero`, `Cedula`, `Direccion`) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
            
                         consulta.setString(1, Nombre);
@@ -30,10 +31,11 @@ public static void Agregar_Paciente(String Nombre, String Apellido, float Peso, 
                         consulta.setFloat(3, Peso);
                         consulta.setFloat(4, Altura);
                         consulta.setInt(5, Edad);
-                        consulta.setString(6, Alergias);
-                        consulta.setString(7, Enfermedades);
-                        consulta.setString(8, TipoSangre);
-                        consulta.setString(9, Telefono);
+                        consulta.setString(6, Telefono);
+                        consulta.setString(7, Alergias);
+                        consulta.setString(8, Enfermedades);
+                        consulta.setString(9, TipoSangre);
+                        
                         consulta.setString(10,Mail);
                         consulta.setString(11,Genero);
                         consulta.setString(12,Cedula);
@@ -63,22 +65,26 @@ public static void Actualizar_Paciente(int ID, String Nombre, String Apellido, f
     
         try {
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call ModificarPaciente (?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+        PreparedStatement consulta = Conexion.con.prepareStatement("UPDATE `paciente` SET `Nombres` = ?, `Apellidos` = ?, `Peso` = ?, `Altura` = ?, `Edad` = ?, `Telefono` = ?, `Alergias` = ?, "
+                + "                                                    `Enfermedades` = ?, `Tipo_Sangre` = ?, `Mail` = ?, `Genero` = ?, `Cedula` = ?, `Direccion` = ? WHERE `paciente`.`ID_Paciente` = ?");
 
-                        consulta.setInt(1,ID);
-                        consulta.setString(2, Nombre);
-                        consulta.setString(3, Apellido);
-                        consulta.setFloat(4, Peso);
-                        consulta.setFloat(5, Altura);
-                        consulta.setInt(6,Edad);
+                        
+                        
+                        consulta.setString(1, Nombre);
+                        consulta.setString(2, Apellido);
+                        consulta.setFloat(3, Peso);
+                        consulta.setFloat(4, Altura);
+                        consulta.setInt(5, Edad);
+                        consulta.setString(6, Telefono);
                         consulta.setString(7, Alergias);
                         consulta.setString(8, Enfermedades);
                         consulta.setString(9, TipoSangre);
-                        consulta.setString(10, Telefono);
-                        consulta.setString(11,Mail );
-                        consulta.setString(12,Genero );
-                        consulta.setString(13,Cedula );
-                        consulta.setString(14,Direccion);
+                        
+                        consulta.setString(10,Mail);
+                        consulta.setString(11,Genero);
+                        consulta.setString(12,Cedula);
+                        consulta.setString(13,Direccion);
+                        consulta.setInt(14,ID);
                        
 
                         consulta.execute();
@@ -98,7 +104,7 @@ public static void Activar_Paciente(int ID){
     
     try{
         
-               CallableStatement consulta = Conexion.con.prepareCall("{call Activar_Paciente (?)}");
+               CallableStatement consulta = Conexion.con.prepareCall("UPDATE `paciente` SET `Estado` = 1 WHERE `paciente`.`ID_Paciente` = ?");
 
                consulta.setInt(1, ID);
                consulta.execute();
@@ -119,7 +125,7 @@ public static void Desactivar_Paciente(int ID){
     
     try{
         
-               CallableStatement consulta = Conexion.con.prepareCall("{call Desactivar_Paciente (?)}");
+               CallableStatement consulta = Conexion.con.prepareCall("UPDATE `paciente` SET `Estado` = 0 WHERE `paciente`.`ID_Paciente` = ?");
 
                consulta.setInt(1, ID);
                consulta.execute();

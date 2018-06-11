@@ -87,7 +87,7 @@ public class Gui_ModificarUsuario extends javax.swing.JDialog {
 
         try {
 
-            resultado = Conexion.consulta("Select * from Usuario where ID_Usuario = " + ID);
+            resultado = Conexion.consulta("Select * from usuario where ID_Usuario = " + ID);
 
             while (resultado.next()) {
                 IDD = resultado.getInt(1);

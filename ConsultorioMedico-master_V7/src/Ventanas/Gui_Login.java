@@ -159,7 +159,12 @@ ResultSet resultado;
             try {
                 Conexion C = new Conexion();
 
-                C.Conectar(Credenciales.UserPass.User, Credenciales.UserPass.Pass);
+                C.Conectar(Credenciales.UserPass.User, Credenciales.UserPass.Pass);{
+                
+                System.out.println("pasaste credenciales");
+            }
+                
+                
             } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println(ex.getMessage());
                 JOptionPane.showMessageDialog(this, "Usuario/contrasena erroneo", "Error de autentificacion", JOptionPane.ERROR_MESSAGE);
@@ -169,9 +174,12 @@ ResultSet resultado;
             String Rol = "";
 
             try {
-
-                resultado = Conexion.consulta("Select ID_Usuario, Rol_Usuario from Usuario where Nombre_Usuario = '" + User + "' "
+                System.out.println("consultando");
+                System.out.println(User+" "+seg.hashing(Pass));                                
+                
+                resultado = Conexion.consulta("Select ID_Usuario, Rol_Usuario from usuario where Nombre_Usuario = '" + User + "' "
                         + " and Contrasena_Usuario = '" + seg.hashing(Pass) + "' and Estado = " + true);
+                
 
                 while (resultado.next()) {
                     ID_Usuario = resultado.getInt(1);

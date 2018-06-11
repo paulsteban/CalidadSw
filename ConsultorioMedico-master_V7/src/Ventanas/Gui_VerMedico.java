@@ -145,7 +145,7 @@ public class Gui_VerMedico extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Modificar();
+Modificar();
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -166,6 +166,7 @@ int Fila = jTable1.getSelectedRow();
 if(Fila >= 0){
   
     int ID = Integer.parseInt(model.getValueAt(Fila, 0).toString());
+    System.out.println("1------------>"+ID);
     
         Gui_ModificarMedico MM = new Gui_ModificarMedico(null, true);
         MM.CargarDatos(ID);
@@ -196,15 +197,15 @@ else{
         
         try {
             
-            resultado = Conexion.consulta("Select * from MedicoV");
+            resultado = Conexion.consulta("SELECT * FROM `medico`");
             
             while (resultado.next()) {
                 Datos[0] = String.valueOf(resultado.getInt(1));
                 Datos[1] = resultado.getString(2);
                 Datos[2] = resultado.getString(3);
                 Datos[3] = resultado.getString(4);
-                Datos[4] = resultado.getString(5);
-                Datos[5] = resultado.getString(6);
+                Datos[4] = resultado.getString(6);
+                Datos[5] = resultado.getString(7);
                 
                 for(int i=0; i<5; i++){
                     System.out.println(Datos[i]);
@@ -214,11 +215,11 @@ else{
                 
                 String Estate;
                 
-                Estate = "Inactivo";
+                Estate = "Activo";
                 
-                if (Estado) {
+              /*  if (Estado) {
                     Estate = "Activo";
-                }
+                }*/
                 Datos[4] = Estate;
                 
                 model.addRow(Datos);
@@ -305,7 +306,7 @@ else{
         
         try {
             
-            resultado = Conexion.consulta("Select * from MedicoV where Nombres like '%"+Buscar+"%' or Apellidos like '%"+Buscar+"%'");
+            resultado = Conexion.consulta("Select * from medico where Nombres like '%"+Buscar+"%' or Apellidos like '%"+Buscar+"%'");
             
             while (resultado.next()) {
                 Datos[0] = String.valueOf(resultado.getInt(1));

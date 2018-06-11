@@ -186,8 +186,9 @@ public class Gui_VerCita extends javax.swing.JInternalFrame {
 
         try {
 
-            resultado = Conexion.consulta("Select ID_Cita,Nombres_Med,Apellidos_Med,"
-                    + "Fecha_Cita,Dia_Cita,Hora_Cita,Nombres,Apellidos,Estado from CitaV");
+            resultado = Conexion.consulta("select ID_Cita,m.Nombres,m.Apellidos,Fecha_Cita,Dia_Cita,Hora_Cita,p.Nombres,p.Apellidos,c.Estado from "
+                    + "medico m, paciente p, cita c "
+                    + "where c.ID_Medico =  m.ID_Medico and c.ID_Paciente = p.ID_Paciente");
 
             while (resultado.next()) {
                 Datos[0] = String.valueOf(resultado.getInt(1));
@@ -235,17 +236,13 @@ public class Gui_VerCita extends javax.swing.JInternalFrame {
         try {
 
             if (cmbBusc.getSelectedIndex() == 0) {
-                resultado = Conexion.consulta("Select ID_Cita,Nombres_Med,Apellidos_Med,"
-                        + "Fecha_Cita,Dia_Cita,Hora_Cita,Nombres,Apellidos,Estado from CitaV "
-                        + "where Nombres like '%" + Buscar + "%' "
-                        + "or Apellidos like '%" + Buscar + "%'");
+                resultado = Conexion.consulta("select ID_Cita,m.Nombres,m.Apellidos,Fecha_Cita,Dia_Cita,Hora_Cita,p.Nombres,p.Apellidos,c.Estado from medico m, paciente p, cita c where c.ID_Medico = m.ID_Medico and c.ID_Paciente = p.ID_Paciente and p.Nombres like '%" + Buscar + "%' "
+                        + "or p.Apellidos like '%" + Buscar + "%'");
             }
 
             if (cmbBusc.getSelectedIndex() == 1) {
-                resultado = Conexion.consulta("Select ID_Cita,Nombres_Med,Apellidos_Med,"
-                        + "Fecha_Cita,Dia_Cita,Hora_Cita,Nombres,Apellidos,Estado from CitaV "
-                        + "where Nombres_Med like '%" + Buscar + "%' "
-                        + "or Apellidos_Med like '%" + Buscar + "%'");
+                resultado = Conexion.consulta("select ID_Cita,m.Nombres,m.Apellidos,Fecha_Cita,Dia_Cita,Hora_Cita,p.Nombres,p.Apellidos,c.Estado from medico m, paciente p, cita c where c.ID_Medico = m.ID_Medico and c.ID_Paciente = p.ID_Paciente and m.Nombres like '%" + Buscar + "%' "
+                        + "or m.Apellidos like '%" + Buscar + "%'");
             }
 
             while (resultado.next()) {

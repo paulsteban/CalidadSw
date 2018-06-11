@@ -8,7 +8,7 @@ package Credenciales;
 
 public class UserPass {
     
-    public static String User = "root";
-    public static String Pass = "root";
+    public static String User = "sql10241932";
+    public static String Pass = "QZNg66bWXK";
     
 }

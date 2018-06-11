@@ -68,8 +68,8 @@ public class Gui_Principal extends javax.swing.JFrame {
         System.out.println(fecha1);
         try {
             resultado = Conexion.consulta("Select distinct Fecha_Cita,Hora_Cita, Mail "
-                    + " from CitaV, paciente "
-                    + " where Fecha_Cita = '"+fecha1+"' and CitaV.Nombres = paciente.Nombres and CitaV.Apellidos = paciente.Apellidos");
+                    + " from cita, paciente "
+                    + " where Fecha_Cita = '"+fecha1+"' and cita.Id_Paciente = paciente.Id_Paciente");
             
             //System.out.println(resultado.next());
             while (resultado.next()) {
@@ -158,7 +158,7 @@ public class Gui_Principal extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("VENTANA PRINCIPAL\n");
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setName("jfPrincipal\n"); // NOI18N
